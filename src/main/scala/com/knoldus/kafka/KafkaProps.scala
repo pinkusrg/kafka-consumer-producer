@@ -7,13 +7,13 @@ import com.typesafe.config.ConfigFactory
 object KafkaProps {
 
   val config = ConfigFactory.load().getConfig("kafkaConf")
-  val bootstrapConf = config.getString("bootstrap")
+  val bootstrapConf = "bootstrap.servers"
   val portConf = config.getString("port")
-  val keySerConf = config.getString("keySerializer")
-  val valSerConf = config.getString("valueSerializer")
-  val serializerConf = config.getString("stringSerializer")
 
   def getProducerProps() = {
+    val serializerConf = "org.apache.kafka.common.serialization.StringSerializer"
+    val keySerConf = "key.serializer"
+    val valSerConf = "value.serializer"
     val props = new Properties()
     props.put(bootstrapConf, portConf)
     props.put(keySerConf, serializerConf)
@@ -21,9 +21,9 @@ object KafkaProps {
     props
   }
   def getConsumerProps() = {
-    val keyDeserConf = config.getString("keyDeserializer")
-    val valDeserConf = config.getString("valueDeserializer")
-    val deserializerConf = config.getString("stringDeserializer")
+    val keyDeserConf = "key.deserializer"
+    val valDeserConf = "value.deserializer"
+    val deserializerConf = "org.apache.kafka.common.serialization.StringDeserializer"
     val groupIdConf = config.getString("groupId")
     val consumerGroupConf = config.getString("consumerGroup")
     val resetProps = config.getString("resetProps")

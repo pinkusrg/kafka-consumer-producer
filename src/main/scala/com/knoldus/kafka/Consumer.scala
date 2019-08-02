@@ -4,7 +4,6 @@ import java.time.Duration
 import java.util
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.slf4j.LoggerFactory
-
 import scala.collection.JavaConverters._
 
 object Consumer {
@@ -27,8 +26,6 @@ object Consumer {
       for (data <- record.iterator) {
         logger.info("Consuming....")
       }
-
     }
-
   }
 }
